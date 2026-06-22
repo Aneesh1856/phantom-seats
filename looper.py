@@ -37,7 +37,7 @@ def run_loop():
                 impersonate="chrome120"
             )
             
-            if "food-and-beverages" in response.url or "Grab a Bite" in response.text:
+            if "food-and-beverages" in response.url or "order-summary" in response.url or "Grab a Bite" in response.text:
                 state.update_refreshed()
                 state.set_session_valid(True)
                 state.add_log("✅ Seats re-held successfully!")
