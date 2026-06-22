@@ -44,7 +44,13 @@ def add_log(message: str):
     logs.append(log_entry)
     if len(logs) > 50:
         logs.pop(0)
-    print(log_entry)
+        
+    # Safely print without emojis for the console (Windows encoding fix)
+    safe_print = log_entry.replace("✅", "[OK]").replace("❌", "[ERR]").replace("⚠️", "[WARN]")
+    try:
+        print(safe_print)
+    except UnicodeEncodeError:
+        print(safe_print.encode('ascii', 'ignore').decode('ascii'))
 
 def get_uptime() -> str:
     if not start_time:
